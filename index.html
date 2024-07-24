@@ -241,20 +241,6 @@
       }
     });
 
-    $(".sec3 .changable_popup .box a").click(function(e) {
-      e.preventDefault();
-
-      var questionElement = $(this).closest('.question');
-      var question = questionElement.find("h1").text().slice(0, -1);
-      var answer = $(this).text();
-
-      handleQuestionAnswer(question, answer);
-      console.log('isDisqualified:', isDisqualified);
-
-      questionElement.hide();
-      questionElement.next().show();
-    });
-
     $( ".sec3 .question4 .box button" ).click(function(e) {
       e.preventDefault();
       if(!$(this).hasClass("isNotValid")){

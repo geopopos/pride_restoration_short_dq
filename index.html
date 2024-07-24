@@ -200,6 +200,11 @@
 
       handleQuestionAnswer(question, answer);
 
+      if (question === "What is your credit score?" && answer === "Poor (400-600)") {
+        window.location.href = "thankyou-dq.html";
+        return;
+      }
+
       questionElement.parent().hide();
       
       if (questionElement.parent().hasClass('first_question')) {

@@ -246,8 +246,8 @@ img {
   width: calc(50% - 5px);
   margin-bottom: 10px;
 }
-.sec3 .question1 .box a:nth-child(3),
-.sec3 .question1 .box a:nth-child(4) {
+.sec3 .question1 .box a:last-child {
+  width: 100%;
   margin-bottom: 0;
 }
 

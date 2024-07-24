@@ -215,7 +215,7 @@
       var question = questionElement.find("h1").text().slice(0, -1);
       var answer = $(this).text();
 
-      if (question === "What is your credit score?" && answer === "Poor (400-600)") {
+      if ($(this).hasClass('disqualify')) {
         isDisqualified = true;
       }
 

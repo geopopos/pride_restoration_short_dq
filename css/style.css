@@ -239,15 +239,27 @@ img {
   max-height: unset;
 }
 
-.sec3 .question1 .box {
+.sec3 .question_three_answers .box {
   flex-wrap: wrap;
 }
-.sec3 .question1 .box a {
+.sec3 .question_three_answers .box a {
   width: calc(50% - 5px);
   margin-bottom: 10px;
 }
-.sec3 .question1 .box a:last-child {
+.sec3 .question_three_answers .box a:last-child {
   width: 100%;
+  margin-bottom: 0;
+}
+
+.sec3 .question_four_answers .box {
+  flex-wrap: wrap;
+}
+.sec3 .question_four_answers .box a {
+  width: calc(50% - 5px);
+  margin-bottom: 10px;
+}
+.sec3 .question_four_answers .box a:nth-child(3),
+.sec3 .question_four_answers .box a:nth-child(4) {
   margin-bottom: 0;
 }
 

@@ -169,11 +169,7 @@
       .then(response => response.json())
       .then(response => console.log(JSON.stringify(response)))
       .then(response => {
-        if (questionDict["What is your credit score?"] === "Poor (400-600)") {
-          window.location.replace("thankyou-dq.html");
-        } else {
-          window.location.replace("thankyou.html");
-        }
+        window.location.replace("thankyou.html");
       })
     }
 
@@ -204,12 +200,12 @@
       var question = questionElement.find("h1").text().slice(0, -1);
       var answer = $(this).text();
 
-      handleQuestionAnswer(question, answer);
-
       if (question === "What is your credit score?" && answer === "Poor (400-600)") {
         window.location.href = "thankyou-dq.html";
         return;
       }
+
+      handleQuestionAnswer(question, answer);
 
       questionElement.parent().hide();
       

@@ -208,10 +208,10 @@
       }
     }
 
-    $(".sec3 .question_container .box a").click(function(e) {
+    $(".sec3 .question_container .box a, .sec3 .changable_popup .box a").click(function(e) {
       e.preventDefault();
 
-      var questionElement = $(this).closest('.textbox');
+      var questionElement = $(this).closest('.textbox, .question');
       var question = questionElement.find("h1").text().slice(0, -1);
       var answer = $(this).text();
 
@@ -222,12 +222,14 @@
       handleQuestionAnswer(question, answer);
       console.log('isDisqualified:', isDisqualified);
 
-      questionElement.parent().hide();
+      questionElement.hide();
       
       if (questionElement.parent().hasClass('first_question')) {
         $(".credit_score_question").show();
-      } else {
+      } else if (questionElement.hasClass('credit_score_question')) {
         $(".changable_popup .question:first").show();
+      } else {
+        questionElement.next().show();
       }
 
       $([document.documentElement, document.body]).animate({

@@ -226,7 +226,7 @@
       
       if (questionElement.parent().hasClass('first_question')) {
         $(".credit_score_question").show();
-      } else if (questionElement.hasClass('credit_score_question')) {
+      } else if (questionElement.parent().hasClass('credit_score_question')) {
         $(".changable_popup .question:first").show();
       } else {
         questionElement.next().show();
@@ -238,6 +238,10 @@
 
       if (counter === 1) {
         $("body").addClass("dark");
+      }
+
+      if (counter == numberofquesn) {
+        submitForm();
       }
     });
 

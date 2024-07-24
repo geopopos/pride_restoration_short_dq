@@ -262,6 +262,9 @@ img {
 .sec3 .question_four_answers .box a:nth-child(4) {
   margin-bottom: 0;
 }
+.sec3 .question_four_answers .box a:last-child {
+  margin-left: auto;
+}
 
 .sec3 .question2 .box {
   flex-wrap: wrap;

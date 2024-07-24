@@ -201,6 +201,7 @@
       questionDict[question] = answer;
       questionArray[counter] = answer;
       updateProgress();
+      console.log('isDisqualified:', isDisqualified);
 
       if(counter == numberofquesn){
         submitForm();
@@ -219,6 +220,7 @@
       }
 
       handleQuestionAnswer(question, answer);
+      console.log('isDisqualified:', isDisqualified);
 
       questionElement.parent().hide();
       
@@ -245,6 +247,7 @@
       var answer = $(this).text();
 
       handleQuestionAnswer(question, answer);
+      console.log('isDisqualified:', isDisqualified);
 
       questionElement.hide();
       questionElement.next().show();
@@ -265,6 +268,7 @@
         }
         questionDict[question_c] = answer;
         questionArray[counter] = answer;
+        console.log('isDisqualified:', isDisqualified);
       }
       var calculateprocents = Math.round((100 * counter) / numberofquesn);
       $(".line p span").html(calculateprocents);

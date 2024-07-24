@@ -157,6 +157,7 @@
     var numberofquesn = $(".sec3 .changable_popup .question").length + 2; // +2 for scope and credit score questions
     var questionArray = [];
     questionDict = {};
+    var isDisqualified = false;
 
     function submitForm() {
       fetch('https://hooks.zapier.com/hooks/catch/5597682/3eb9o0g/', {
@@ -169,7 +170,7 @@
       .then(response => response.json())
       .then(response => console.log(JSON.stringify(response)))
       .then(() => {
-        if (questionDict["What is your credit score?"] === "Poor (400-600)") {
+        if (isDisqualified) {
           window.location.href = "thankyou-dq.html";
         } else {
           window.location.href = "thankyou.html";
@@ -178,7 +179,7 @@
       .catch(error => {
         console.error('Error:', error);
         // Fallback redirection in case of error
-        if (questionDict["What is your credit score?"] === "Poor (400-600)") {
+        if (isDisqualified) {
           window.location.href = "thankyou-dq.html";
         } else {
           window.location.href = "thankyou.html";
@@ -212,6 +213,10 @@
       var questionElement = $(this).closest('.textbox');
       var question = questionElement.find("h1").text().slice(0, -1);
       var answer = $(this).text();
+
+      if (question === "What is your credit score?" && answer === "Poor (400-600)") {
+        isDisqualified = true;
+      }
 
       handleQuestionAnswer(question, answer);
 

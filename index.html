@@ -168,7 +168,13 @@
       })
       .then(response => response.json())
       .then(response => console.log(JSON.stringify(response)))
-      .then(response => window.location.replace("thankyou.html"))
+      .then(response => {
+        if (questionDict["What is your credit score?"] === "Poor (400-600)") {
+          window.location.replace("thankyou-dq.html");
+        } else {
+          window.location.replace("thankyou.html");
+        }
+      })
     }
 
     function updateProgress() {

@@ -76,26 +76,28 @@
     </div>
     <div class="sec3">
       <div class="wrapper">
-        <div class="first_question">
-          <div class="textbox question1">
-            <h1>What is the Scope of This Project?</h1>
-            <div class="box">
-              <div class="arow"><img src="img/arow.png" alt="" /></div>
-              <a href="">Replace Complete Roof</a>
-              <a href="">New Construction</a>
-              <a href="">Repair Existing Roof - Currently Leaking or Storm Damage</a>
+        <div class="question_container">
+          <div class="first_question">
+            <div class="textbox question1">
+              <h1>What is the Scope of This Project?</h1>
+              <div class="box">
+                <div class="arow"><img src="img/arow.png" alt="" /></div>
+                <a href="">Replace Complete Roof</a>
+                <a href="">New Construction</a>
+                <a href="">Repair Existing Roof - Currently Leaking or Storm Damage</a>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="credit_score_question">
-          <div class="textbox question1">
-            <h1>What is your credit score?</h1>
-            <div class="box">
-              <div class="arow"><img src="img/arow.png" alt="" /></div>
-              <a href="">Poor (400-600)</a>
-              <a href="">Fair (600-650)</a>
-              <a href="">Good (650-720)</a>
-              <a href="">Great (720+)</a>
+          <div class="credit_score_question" style="display: none;">
+            <div class="textbox question1">
+              <h1>What is your credit score?</h1>
+              <div class="box">
+                <div class="arow"><img src="img/arow.png" alt="" /></div>
+                <a href="">Poor (400-600)</a>
+                <a href="">Fair (600-650)</a>
+                <a href="">Good (650-720)</a>
+                <a href="">Great (720+)</a>
+              </div>
             </div>
           </div>
         </div>
@@ -152,73 +154,80 @@
 
 
     var counter = 0;
-    var numberofquesn = $(".sec3 .changable_popup .question").length + 1;
+    var numberofquesn = $(".sec3 .changable_popup .question").length + 2; // +2 for scope and credit score questions
     var questionArray = [];
     questionDict = {};
 
     function submitForm() {
       fetch('https://hooks.zapier.com/hooks/catch/5597682/3eb9o0g/', {
-		    	method: 'POST',
-		    	headers: {
-		    		'Accept': 'application/json',
-		    	},
-		    	body: JSON.stringify(questionDict)
-		    })
-		    .then(response => response.json())
-		    .then(response => console.log(JSON.stringify(response)))
-		    .then(response => window.location.replace("thankyou.html"))
-        
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(questionDict)
+      })
+      .then(response => response.json())
+      .then(response => console.log(JSON.stringify(response)))
+      .then(response => window.location.replace("thankyou.html"))
     }
 
-    $( ".sec3 .first_question .box a" ).click(function(e) {
-      e.preventDefault();
-
-      $("body").addClass("dark");
-      $(".line .progresline").css("width", "10%");
-      counter = 1;
-      var question_c = $(this).parent().parent().find("h1").text().slice(0,-1);
-      var answer = $(this).text();
-
-      questionDict[question_c] = answer;
-      questionArray[counter] = answer;
-      // alert(questionArray[1]);
-      
-      $(".line p span").html(10);
-      var showquestion = ".question2";
-      $(showquestion).css("display", "block");
-      $([document.documentElement, document.body]).animate({
-        scrollTop: $(".sec3").offset().top - 70
-    }, 500);
-    });
-
-    $( ".sec3 .changable_popup .box a" ).click(function(e) {
-      e.preventDefault();
-
-      $(this).parent().parent().css("display", "none");
-      $(this).parent().parent().next().css("display", "block");
-      counter += 1;
-      var question_c = $(this).parent().parent().find("h1").text().slice(0,-1);
-      var answer = $(this).text();
-      questionDict[question_c] = answer;
-      questionArray[counter] = answer;
-
-
-
+    function updateProgress() {
       var calculateprocents = Math.round((100 * counter) / numberofquesn);
       $(".line p span").html(calculateprocents);
       $(".line .progresline").css("width", calculateprocents+"%");
       if(calculateprocents > 50){
         $(".line .progresline").parent().addClass("white_c");
       }
+    }
+
+    function handleQuestionAnswer(question, answer) {
+      counter += 1;
+      questionDict[question] = answer;
+      questionArray[counter] = answer;
+      updateProgress();
 
       if(counter == numberofquesn){
-        var stringofelements = ""
-        for(var i = 1 ; i < questionArray.length; i++){
-          stringofelements += questionArray[i] + "\n"
-        }
-        // alert(stringofelements);
         submitForm();
       }
+    }
+
+    $(".sec3 .question_container .box a").click(function(e) {
+      e.preventDefault();
+
+      var questionElement = $(this).closest('.textbox');
+      var question = questionElement.find("h1").text().slice(0, -1);
+      var answer = $(this).text();
+
+      handleQuestionAnswer(question, answer);
+
+      questionElement.parent().hide();
+      
+      if (questionElement.parent().hasClass('first_question')) {
+        $(".credit_score_question").show();
+      } else {
+        $(".changable_popup .question:first").show();
+      }
+
+      $([document.documentElement, document.body]).animate({
+        scrollTop: $(".sec3").offset().top - 70
+      }, 500);
+
+      if (counter === 1) {
+        $("body").addClass("dark");
+      }
+    });
+
+    $(".sec3 .changable_popup .box a").click(function(e) {
+      e.preventDefault();
+
+      var questionElement = $(this).closest('.question');
+      var question = questionElement.find("h1").text().slice(0, -1);
+      var answer = $(this).text();
+
+      handleQuestionAnswer(question, answer);
+
+      questionElement.hide();
+      questionElement.next().show();
     });
 
     $( ".sec3 .question4 .box button" ).click(function(e) {

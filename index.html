@@ -93,7 +93,7 @@
               <h1>What is your credit score?</h1>
               <div class="box">
                 <div class="arow"><img src="img/arow.png" alt="" /></div>
-                <a href="">Poor (400-600)</a>
+                <a href="" class="disqualify">Poor (400-600)</a>
                 <a href="">Fair (600-650)</a>
                 <a href="">Good (650-720)</a>
                 <a href="">Great (720+)</a>
@@ -200,7 +200,7 @@
       var question = questionElement.find("h1").text().slice(0, -1);
       var answer = $(this).text();
 
-      if (question === "What is your credit score?" && answer === "Poor (400-600)") {
+      if ($(this).hasClass('disqualify')) {
         window.location.href = "thankyou-dq.html";
         return;
       }

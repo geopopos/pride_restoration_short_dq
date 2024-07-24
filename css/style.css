@@ -244,10 +244,11 @@ img {
 }
 .sec3 .question1 .box a {
   width: calc(50% - 5px);
+  margin-bottom: 10px;
 }
-.sec3 .question1 .box a:last-child {
-  width: 100%;
-  margin-top: 10px;
+.sec3 .question1 .box a:nth-child(3),
+.sec3 .question1 .box a:nth-child(4) {
+  margin-bottom: 0;
 }
 
 .sec3 .question2 .box {

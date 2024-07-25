@@ -73,5 +73,21 @@
       </div>
     </div>
   </body>
-  <script></script>
+  <script>
+    // Fire pageview event
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+      'event': 'pageview',
+      'page': {
+        'title': 'Thank You Page',
+        'path': '/thankyou-dq.html'
+      }
+    });
+
+    // Fire DQLead event
+    dataLayer.push({
+      'event': 'DQLead',
+      'leadType': 'Roof Replacement'
+    });
+  </script>
 </html>

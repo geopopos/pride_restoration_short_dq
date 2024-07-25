@@ -43,7 +43,7 @@
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '933693704546861');
       fbq('track', 'PageView');
-      fbq('track', 'SubmitApplication');
+      fbq('track', 'DQLead');
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=933693704546861&ev=PageView&noscript=1"
@@ -91,21 +91,4 @@
       </div>
     </div>
   </body>
-  <script>
-    // Fire pageview event
-    window.dataLayer = window.dataLayer || [];
-    dataLayer.push({
-      'event': 'pageview',
-      'page': {
-        'title': 'Thank You Page',
-        'path': '/thankyou-dq.html'
-      }
-    });
-
-    // Fire DQLead event
-    dataLayer.push({
-      'event': 'DQLead',
-      'leadType': 'Roof Replacement'
-    });
-  </script>
 </html>
